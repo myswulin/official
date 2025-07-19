@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>武林外传 · 首页</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    html {
+      scroll-behavior: smooth;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary: #8B0000;
+      --secondary: #d2691e;
+      --gold: #d4af37;
+      --light-bg: #f9f6f1;
+      --dark-text: #333;
+      --light-text: #f9f6f1;
+      --border-color: #d4af3733;
+    }
+    
+    body {
+      font-family: '微软雅黑', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #1a0a0a 0%, #3a1c1c 100%);
+      color: var(--light-text);
+      line-height: 1.8;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path fill="%238b000010" d="M42.1,50.1C42.1,50.1,42.1,50.1,42.1,50.1C42.7,49.4,43.4,48.8,44.2,48.3c2.4-1.7,5.7-1.4,7.7,0.7c2.3,2.4,2.1,6.3-0.6,8.4c-1.4,1.1-3.2,1.6-4.9,1.5c-0.3,0-0.6-0.1-0.9-0.1c-0.3-0.1-0.6-0.2-0.8-0.3c-0.7-0.3-1.4-0.8-1.9-1.4C41.3,55.7,41.1,52.8,42.1,50.1z"/></svg>');
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* 头部样式 */
+    header {
+      background: rgba(10, 5, 2, 0.85);
+      padding: 15px 0;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--gold);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      margin-bottom: 40px;
+    }
+    
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+    }
+    
+    .logo h1 {
+      font-size: 2.5rem;
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+      letter-spacing: 3px;
+      position: relative;
+    }
+    
+    .logo h1::after {
+      content: "· 官方网页";
+      font-size: 1.2rem;
+      color: var(--light-text);
+      position: absolute;
+      right: -120px;
+      bottom: 5px;
+      letter-spacing: 1px;
+    }
+    
+    .logo i {
+      font-size: 2.8rem;
+      color: var(--gold);
+      animation: pulse 2s infinite;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      gap: 5px;
+      background: rgba(139, 0, 0, 0.3);
+      padding: 8px;
+      border-radius: 50px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .nav-tab {
+      display: block;
+      padding: 8px 25px;
+      border-radius: 50px;
+      background: transparent;
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-tab.active, .nav-tab:hover {
+      background: var(--primary);
+      color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+    }
+    
+    /* 主内容区 */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .section {
+      background: linear-gradient(to bottom, rgba(43, 15, 15, 0.8), rgba(29, 10, 10, 0.9));
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    
+    .section h2 {
+      text-align: center;
+      color: var(--gold);
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .section h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    
+    .section p {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .reward-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .reward-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(212, 175, 55, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease;
+    }
+    
+    .reward-list li:hover {
+      transform: translateY(-5px);
+      background: rgba(212, 175, 55, 0.2);
+    }
+    
+    .reward-list li i {
+      color: var(--gold);
+      font-size: 1.5rem;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+    }
+    
+    .highlight {
+      display: inline-block;
+      background: linear-gradient(to right, #8B0000, #d2691e);
+      color: var(--gold);
+      font-weight: bold;
+      padding: 8px 20px;
+      border-radius: 30px;
+      margin: 20px auto;
+      text-align: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    
+    .highlight:hover {
+      transform: scale(1.05);
+    }
+    
+    /* 表格样式 */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 25px 0;
+      background: rgba(20, 8, 8, 0.6);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    th {
+      background: linear-gradient(to bottom, #8B0000, #5a0000);
+      color: var(--gold);
+      padding: 16px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-bottom: 2px solid var(--gold);
+    }
+    
+    td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      transition: background 0.3s ease;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:hover td {
+      background: rgba(212, 175, 55, 0.1);
+      transform: scale(1.01);
+    }
+    
+    .gold-text {
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    
+    /* 页脚样式 */
+    footer {
+      background: rgba(10, 5, 2, 0.9);
+      padding: 30px 0 20px;
+      text-align: center;
+      border-top: 2px solid var(--gold);
+      margin-top: 40px;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .footer-logo {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+    
+    .disclaimer {
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .copyright {
+      color: #777;
+      font-size: 0.85rem;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .logo h1 {
+        font-size: 2rem;
+      }
+      
+      .logo h1::after {
+        position: static;
+        display: block;
+        font-size: 1rem;
+        margin-top: 5px;
+      }
+      
+      .section {
+        padding: 20px 15px;
+      }
+      
+      .section h2 {
+        font-size: 1.8rem;
+      }
+      
+      .nav-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      th, td {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo h1 {
+        font-size: 1.6rem;
+      }
+      
+      .reward-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .section h2 {
+        font-size: 1.6rem;
+      }
+      
+      .nav-tab {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* 动画效果 */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    /* 新增的充值按钮 */
+    .recharge-btn {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 15px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+    
+    .recharge-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+<style>
+#back-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  background-color: rgba(139, 0, 0, 0.9);
+  color: #f9f6f1;
+  border: 2px solid #d4af37;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 999;
+  cursor: pointer;
+  display: none;
+  transition: all 0.3s ease;
+}
+#back-to-top:hover {
+  background-color: #d2691e;
+  color: #fff;
+}
+</style></head>
+<body>
+<!-- 头部区域 -->
+<header>
+<div class="container">
+<div class="header-content">
+<a class="logo" href="#">
+<i class="fas fa-dragon floating"></i>
+<h1>武林外传·飞羽·马来西亚</h1>
+</a>
+<div class="nav-tabs">
+<a class="nav-tab active" href="#">首页</a><a class="nav-tab" href="https://myswulin.github.io/official/update.html" target="_blank">版本更新</a>
+<a class="nav-tab" href="#career">职业介绍</a>
+<a class="nav-tab" href="#download">游戏下载</a>
+<a class="nav-tab" href="#recharge-single">游戏充值</a>
+<a class="nav-tab" href="https://www.facebook.com/myswulin" target="_blank">联系客服</a></div>
+</div>
+</div>
+</header>
+<div class="container">
+<div class="main-content">
+<!-- 游戏介绍 -->
+<video controls="True" style="margin: 40px auto; display: block; border-radius: 12px; max-width: 800px;" width="100%"><source src="game_intro.mp4" type="video/mp4"/>您的浏览器不支持 HTML5 视频播放。</video><div class="section" id="career">
+<h2><i class="fas fa-book-open"></i> 武林群侠谱：谁是你的本命职业？</h2>
+<img alt="武林角色图" src="charactor.jpg" style="display:block; margin:30px auto; max-width:100%; border-radius:12px; border:2px solid var(--border-color);"/><p style="text-align:center; font-size:1.05rem;">
+    🎯 开服选职指南！九大派系决战江湖，天命所归由你定！<br/>
+    七侠镇钟声再响，同福客栈老友重聚！<br/>
+    新《武林外传》江湖重启在即，九大职业派系豪杰并起——<br/>
+    是化身一枪破敌的战场主宰？还是成为暗夜索魂的致命刺客？<br/>
+    你的本命职业，早已在武林谱上写下姓名！<br/><br/>
+    “江湖不問出處，職業不論強弱——你的熱血，才是武林最強的武功！”
+  </p>
+<ul class="reward-list">
+<li><i class="fas fa-shield-alt"></i><div><strong>枪系</strong><div>【高防反伤·冲锋陷阵】</div></div></li>
+<li><i class="fas fa-gavel"></i><div><strong>剑系</strong><div>【连招爆发·七进七出】</div></div></li>
+<li><i class="fas fa-briefcase-medical"></i><div><strong>医系</strong><div>【起死回生·团队大脑】</div></div></li>
+<li><i class="fas fa-fire"></i><div><strong>法系</strong><div>【冰火齐发·全场轰炸】</div></div></li>
+<li><i class="fas fa-paw"></i><div><strong>巫祝系</strong><div>【万兽听令·挂机之王】</div></div></li>
+<li><i class="fas fa-snowflake"></i><div><strong>寒星系</strong><div>【冻结时空·风筝大师】</div></div></li>
+<li><i class="fas fa-mask"></i><div><strong>御魄系</strong><div>【双形态切换·诡术大师】</div></div></li>
+<li><i class="fas fa-ghost"></i><div><strong>斗魂系</strong><div>【鬼斩定身·猎刃锁敌】</div></div></li>
+<li><i class="fas fa-user-secret"></i><div><strong>狂魔系</strong><div>【玄冥冰甲·影舞分身】</div></div></li>
+</ul>
+</div>
+<!-- 游戏客户端下载 -->
+<div class="section" id="download">
+<h2><i class="fas fa-download"></i> 游戏客户端下载</h2>
+<p style="text-align:center; font-size: 1.05rem;">
+<strong>游戏下载：</strong><br/>
+<a href="https://drive.google.com/file/d/1zSJjXtinzbgHPfqCuU8Nqhi2U1F3L9bQ/view?usp=drive_link" style="color: var(--gold); text-decoration: underline;" target="_blank">点击下载游戏客户端</a><br/><br/>
+<strong>备用链接：</strong><br/><a href="https://drive.google.com/file/d/1PKMYDbaElsyjKB8isYY5muY3HZFk3iky/view?usp=sharing" style="color: var(--gold); text-decoration: underline;" target="_blank">点击备用下载链接</a><br/><br/>
+<strong>登陆器下载：</strong><br/>
+<a href="https://drive.google.com/file/d/1Y4aABMZpsUKUWZwTvIB54PyZkg7pGtfm/view?usp=drive_link" style="color: var(--gold); text-decoration: underline;" target="_blank">点击下载登陆器</a><br/><br/>
+<strong>解压密码：</strong> mys666<br/><br/>
+<strong>注意事项：</strong> 请将客户端加入防毒软件白名单，以防误杀登陆器等重要文件，导致游戏无法运行。
+  </p>
+</div>
+<!-- 注册领豪礼 -->
+<div class="section">
+<h2><i class="fas fa-gift"></i> 注册领豪礼</h2>
+<p style="text-align:center;">注册游戏即可免费领取开服礼包：</p>
+<ul class="reward-list">
+<li>
+<i class="fas fa-user-ninja"></i>
+<div>
+<strong>暴走一族时装</strong>
+<div>拉风外观，彰显个性</div>
+</div>
+</li>
+<li>
+<i class="fas fa-gavel"></i>
+<div>
+<strong>绝世武器</strong>
+<div>战力飙升，开局无敌</div>
+</div>
+</li>
+<li>
+<i class="fas fa-horse-head"></i>
+<div>
+<strong>限时坐骑</strong>
+<div>御风而行，畅游江湖</div>
+</div>
+</li>
+<li>
+<i class="fas fa-scroll"></i>
+<div>
+<strong>如意令</strong>
+<div>福利满满，助你畅玩</div>
+</div>
+</li>
+</ul>
+<div class="highlight">⚠ 每个账号仅限领取一次</div>
+<a class="recharge-btn" href="https://www.facebook.com/myswulin" target="_blank">联系客服领取</a>
+</div>
+<!-- 充值说明 -->
+<!-- 首充礼包区域 -->
+<div class="section" id="recharge">
+<h2><i class="fas fa-gift"></i> 首充礼包</h2>
+<p>凡首次充值即可获得以下超值奖励：</p>
+<ul class="reward-list">
+<li>
+<i class="fas fa-horse"></i>
+<div>
+<strong>雪霜狼坐骑 ×1</strong>
+<div>稀有坐骑，踏雪无痕</div>
+</div>
+</li>
+<li>
+<i class="fas fa-coins"></i>
+<div>
+<strong>金砖 ×1</strong>
+<div>价值连城的金砖</div>
+</div>
+</li>
+<li>
+<i class="fas fa-gem"></i>
+<div>
+<strong>坤位法宝</strong>
+<div>增强角色属性的强力法宝</div>
+</div>
+</li>
+<li>
+<i class="fas fa-archive"></i>
+<div>
+<strong>背包、时装、坐骑、仓库、帮派仓库格子共开启144格</strong>
+<div>大幅扩展存储空间</div>
+</div>
+</li>
+</ul>
+<div class="highlight">奖励总价值超过 200 元宝</div>
+<a class="recharge-btn" href="https://payment.tngdigital.com.my/sc/dRac26QZHj" target="_blank">立即充值</a>
+</div>
+<!-- 单笔充值奖励 -->
+<div class="section" id="recharge-single">
+<div class="section" id="recharge-single">
+<div class="section">
+<h2><i class="fas fa-money-bill-wave"></i> 单笔充值奖励</h2>
+<p>单笔充值指定金额，立即获得对应奖励：</p>
+<table>
+<tr>
+<th>充值金额（RM）</th>
+<th>金元宝</th>
+<th>赠送元宝</th>
+<th>额外道具</th>
+</tr>
+<tr>
+<td>RM50</td>
+<td class="gold-text">50</td>
+<td class="gold-text">2金50银元宝</td>
+<td>-</td>
+</tr>
+<tr>
+<td>RM100</td>
+<td class="gold-text">100</td>
+<td class="gold-text">10金元宝</td>
+<td>聚宝盆 ×1</td>
+</tr>
+<tr>
+<td>RM300</td>
+<td class="gold-text">300</td>
+<td class="gold-text">45金元宝</td>
+<td>聚宝盆 ×3</td>
+</tr>
+<tr>
+<td>RM500</td>
+<td class="gold-text">500</td>
+<td class="gold-text">100金元宝</td>
+<td>聚宝盆 ×8</td>
+</tr>
+<tr>
+<td>RM688</td>
+<td class="gold-text">688</td>
+<td class="gold-text">206金40银元宝</td>
+<td>聚宝盆 ×14</td>
+</tr>
+</table>
+<a class="recharge-btn" href="https://payment.tngdigital.com.my/sc/dRac26QZHj" target="_blank">立即充值</a>
+</div>
+<!-- 累计充值返利 -->
+<div class="section">
+<h2><i class="fas fa-chart-line"></i> 累计充值返利</h2>
+<p>累计充值达到指定额度，领取超值返利：</p>
+<table>
+<tr>
+<th>累计金额（RM）</th>
+<th>奖励内容</th>
+<th>返利百分比</th>
+</tr>
+<tr><td>RM880</td><td>商城金元宝 ×375</td><td class="gold-text">42.6%</td></tr>
+<tr><td>RM1380</td><td>商城金元宝 ×375 + 黄金卡 ×1</td><td class="gold-text">48.9%</td></tr>
+<tr><td>RM1880</td><td>商城金元宝 ×375 + 黄金卡 ×1</td><td class="gold-text">35.9%</td></tr>
+<tr><td>RM2380</td><td>商城金元宝 ×375 + 黄金卡 ×1</td><td class="gold-text">28.3%</td></tr>
+<tbody id="extra-rebate" style="display:none;"><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">RM2880</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">商城金元宝 ×375 + 黄金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">23.4%</td></tr><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">RM3380</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">商城金元宝 ×375 + 黄金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">19.9%</td></tr><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">RM3880</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">商城金元宝 ×375 + 黄金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">17.4%</td></tr><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">RM4380</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">商城金元宝 ×375 + 铂金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">31.35%</td></tr><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">RM4880</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">商城金元宝 ×375 + 铂金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">28.1%</td></tr><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">RM5380</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">商城金元宝 ×375 + 铂金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">25.56%</td></tr><tr><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);border-bottom: none;">RM5880</td><td style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);border-bottom: none;">商城金元宝 ×375 + 铂金卡 ×1</td><td class="gold-text" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);border-bottom: none;">24.6%</td></tr></tbody></table><button onclick="var extra = document.getElementById('extra-rebate');var btn = this;if (extra.style.display === 'none') {  extra.style.display = 'table-row-group';  btn.textContent = '收起';} else {  extra.style.display = 'none';  btn.textContent = '显示更多';}" style="margin: 15px auto; display: block; padding: 8px 16px; background: var(--primary); color: var(--gold); border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">显示更多</button>
+<a class="recharge-btn" href="https://payment.tngdigital.com.my/sc/dRac26QZHj" target="_blank">立即充值</a>
+</div>
+<div class="section">
+<h2><i class="fas fa-headset"></i> 充值咨询</h2>
+<div style="text-align:center; margin-top: 30px;">
+<h3 style="color: var(--gold); font-size: 1.3rem;">扫码支付方式</h3>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin: 20px 0;">
+<div>
+<img alt="DuitNow QR" src="duitnow.jpg" style="max-width: 240px; border-radius: 12px; border: 1px solid var(--border-color);"/>
+<p style="margin-top: 10px;">DuitNow QR</p>
+</div>
+<div>
+<img alt="Touch 'n Go QR" src="touchngo.jpg" style="max-width: 240px; border-radius: 12px; border: 1px solid var(--border-color);"/>
+<p style="margin-top: 10px;">Touch 'n Go eWallet</p>
+</div>
+</div>
+<a href="https://payment.tngdigital.com.my/sc/dRac26QZHj" style="display:inline-block; padding: 12px 24px; background: var(--primary); color: var(--gold); border-radius: 30px; font-weight:bold; text-decoration:none; border: 1px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease;" target="_blank">
+      💳 Link Payment
+    </a>
+</div>
+<p style="text-align:center; font-size: 1.1rem; color: var(--gold);">
+    充值请联系客服：<a href="https://www.facebook.com/myswulin" style="color: var(--light-text); text-decoration: underline;" target="_blank">www.facebook.com/myswulin</a>
+<br/>
+    支持 TNG、QR PAY、USDT 等方式
+  </p>
+</div></div>
+</div>
+<!-- 页脚区域 -->
+<footer>
+<div class="container">
+<div class="footer-content">
+<div class="footer-logo">
+<i class="fas fa-dragon"></i>
+</div>
+<p class="disclaimer">
+          本活动最终解释权归《武林外传·飞羽·马来西亚》运营团队所有<br/>
+          充值前请确认账号信息，充值成功后无法退款<br/>
+          如有任何问题，请联系客服：www.facebook.com/myswulin
+        </p>
+<p class="copyright">
+  © 2025 《武林外传·飞羽·马来西亚》<br/><br/>
+  抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防上当受骗<br/>
+  适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
+</p>
+</div>
+</div>
+</footer>
+<script>
+    // 标签切换效果
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        // 移除所有active类
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        // 为当前标签添加active类
+        this.classList.add('active');
+        
+        // 阻止默认跳转行为（实际应用中应删除此行）
+        });
+    });
+    
+    // 表格行悬停效果增强
+    const tableRows = document.querySelectorAll('tr');
+    tableRows.forEach(row => {
+      row.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.01)';
+        this.style.transition = 'transform 0.3s ease';
+      });
+      
+      row.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+    
+    // 充值按钮动画
+    document.querySelectorAll('.recharge-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px) scale(1.05)';
+      });
+      
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  </script>
+</div></div><div id="back-to-top" onclick="scrollToTop()">返回首页</div><script>
+window.addEventListener("scroll", function() {
+  const button = document.getElementById("back-to-top");
+  if (window.scrollY > 300) {
+    button.style.display = "block";
+  } else {
+    button.style.display = "none";
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script></body>
+</html>
